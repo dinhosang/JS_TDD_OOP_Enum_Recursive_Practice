@@ -6,46 +6,50 @@ const dinoType  = require('../enums/dinoType.js')
 describe('Park', function(){
 
   let park;
-  let parkWith;
-  let dinosaurTric1;
-  let dinosaurTric2;
-  let dinosaurVelo1;
-  let dinosaurVelo2;
-  let dinosaurTyra1;
-  let dinosaurTyra2;
-  let arrayOfDinosaurs;
-  let arrayOfDinosaursWithoutTyra;
-  let arrayOfDinosaursWithTwoOrMoreAnnualOffspring;
-
 
   beforeEach(function(){
     park = new Park("JP");
-    parkWith = new Park("Dinosaurs R Us");
-    tric1 = new Dinosaur(dinoType.TRICEROTOPS, 3);
-    tric2 = new Dinosaur(dinoType.TRICEROTOPS, 1);
-    velo1 = new Dinosaur(dinoType.VELOCIRAPTOR, 4);
-    velo2 = new Dinosaur(dinoType.VELOCIRAPTOR, 2);
-    tyra1 = new Dinosaur(dinoType.TYRANNOSAURUS, 2);
-    tyra2 = new Dinosaur(dinoType.TYRANNOSAURUS, 1);
-    // console.log(tyra2.type);
-    arrayOfDinosaurs = [tric1, velo1,tric2,
-                        tyra1, velo2, tyra2];
-
-    arrayOfDinosaursWithoutTyra = [tric1, velo1,
-                                    tric2, velo2];
-
-    arrayOfDinosaursWithTwoOrMoreAnnualOffspring = [
-      tric1, velo1, tyra1, velo2
-    ]
-
-    parkWith.addMultipleDinosaurs(arrayOfDinosaurs);
   })
 
   it('should have a name', function(){
     assert.equal(park.name, "JP");
   })
 
+
   describe('enclosure', function(){
+
+    let parkWith;
+    let dinosaurTric1;
+    let dinosaurTric2;
+    let dinosaurVelo1;
+    let dinosaurVelo2;
+    let dinosaurTyra1;
+    let dinosaurTyra2;
+    let arrayOfDinosaurs;
+    let arrayOfDinosaursWithoutTyra;
+    let arrayOfDinosaursWithTwoOrMoreAnnualOffspring;
+
+    beforeEach(function(){
+      parkWith = new Park("Dinosaurs R Us");
+      tric1 = new Dinosaur(dinoType.TRICERATOPS);
+      tric2 = new Dinosaur(dinoType.TRICERATOPS);
+      velo1 = new Dinosaur(dinoType.VELOCIRAPTOR);
+      velo2 = new Dinosaur(dinoType.VELOCIRAPTOR);
+      tyra1 = new Dinosaur(dinoType.TYRANNOSAURUS);
+      tyra2 = new Dinosaur(dinoType.TYRANNOSAURUS);
+      // console.log(tyra2.type);
+      arrayOfDinosaurs = [tric1, velo1,tric2,
+                          tyra1, velo2, tyra2];
+
+      arrayOfDinosaursWithoutTyra = [tric1, velo1,
+                                      tric2, velo2];
+
+      arrayOfDinosaursWithTwoOrMoreAnnualOffspring = [
+        velo1, tyra1, velo2, tyra2
+      ]
+
+      parkWith.addMultipleDinosaurs(arrayOfDinosaurs);
+    });
 
     it('should start empty', function(){
       assert.deepEqual(park.enclosure, [])
@@ -80,8 +84,32 @@ describe('Park', function(){
     })
   })
 
+
   describe('calculating offspring', function(){
-    
+
+    let tyrannosaurus;
+    let dilophosaurus;
+
+    beforeEach(function(){
+      tyrannosaurus = new Dinosaur(dinoType.TYRANNOSAURUS);
+      dilophosaurus = new Dinosaur(dinoType.DILOPHOSAURUS);
+    })
+
+    // it('should be able to calculate number of dinosaurs after 1 year starting with 1 dinosaur', function(){
+    //   park.addDinosaur(tyrannosaurus);
+    //   assert.strictEqual(park.calculateDinosaurs(1), 4);
+    // });
+
+    // it('should be able to calculate number of dinosaurs after 2 years starting with 1 dinosaur', function(){
+    //   park.addDinosaur(tyrannosaurus);
+    //   assert.strictEqual(park.calculateDinosaurs(2), 16);
+    // });
+    //
+    // it('should be able to calculate number of dinosaur after year two starting with 2 dinosaurs', function(){
+    //   park.addDinosaur(tyrannosaurus);
+    //   park.addDinosaur(dilophosaurus);
+    //   assert.strictEqual(park.calculateDinosaurs(2), 25);
+    // });
   })
 
 

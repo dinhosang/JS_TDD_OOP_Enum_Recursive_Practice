@@ -25,7 +25,7 @@ Park.prototype.getNumberDinosaurs = function(){
 Park.prototype.checkForDinosaurOfTypeToRemove = function(type){
   for(dinosaur of this.enclosure){
 
-    if(type === dinosaur.type){
+    if(type.name === dinosaur.type){
       return this.enclosure.indexOf(dinosaur)
     }
   }
@@ -67,6 +67,10 @@ Park.prototype.getDinosAnnualOffspringOfOrMore = function(number){
   return arrayOfDinosaurs;
 }
 
+
+Park.prototype.calculateDinosaurs = function(years){
+
+}
 
 module.exports = Park;
 

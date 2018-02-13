@@ -1,6 +1,6 @@
-const Dinosaur = function(type, annualOffspring){
-  this.type = type;
-  this.annualOffspring = annualOffspring;
+const Dinosaur = function(type){
+  this.type = type.name;
+  this.annualOffspring = type.annualOffspring;
 
   Object.preventExtensions(this);
 }
