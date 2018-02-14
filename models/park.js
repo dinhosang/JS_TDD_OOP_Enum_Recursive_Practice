@@ -71,7 +71,7 @@ Park.prototype.getDinosAnnualOffspringMoreThan = function(number){
 }
 
 
-Park.prototype.setupTotalHash = function(){
+Park.prototype.setupTotalOffspringHashAndCalculateFirstYear = function(){
 
   let type;
   let innerHash;
@@ -87,13 +87,11 @@ Park.prototype.setupTotalHash = function(){
       innerHash.multiplier = dinosaur.annualOffspring + 1;
     }
     else {
-      innerHash = totalHash[type];
       innerHash.total += 1;
     }
   }
 
   totalHash = this.calculateOffspringForYear(totalHash)
-
   return totalHash;
 }
 
@@ -110,7 +108,7 @@ Park.prototype.calculateOffspringForYear = function(totalHash){
 }
 
 
-Park.prototype.calcYearOffspring = function(yearsToCalculate, total){
+Park.prototype.calcHashOffspringInRange = function(yearsToCalculate, total){
 
   let totalHash = total;
 
@@ -119,7 +117,7 @@ Park.prototype.calcYearOffspring = function(yearsToCalculate, total){
   }
 
   if(totalHash === null){
-    totalHash = this.setupTotalHash();
+    totalHash = this.setupTotalOffspringHashAndCalculateFirstYear();
   }
   else {
     totalHash = this.calculateOffspringForYear(totalHash);
@@ -127,18 +125,18 @@ Park.prototype.calcYearOffspring = function(yearsToCalculate, total){
 
   yearsToCalculate -= 1;
 
-  return this.calcYearOffspring(yearsToCalculate,
+  return this.calcHashOffspringInRange(yearsToCalculate,
                                 totalHash);
 }
 
-
+// could also just get the total of only the setup hash of first year
+// before sending it to the calculateOffspringForYear part,
+// and then bring it to the power of the number of years :o
 Park.prototype.calculateDinosaurs = function(years){
   let totalDinosAfterFinalCalc = 0;
   let hashTotalsPerType = null;
-  let yearsToCalculate = years;
 
-  hashTotalsPerType = this.calcYearOffspring(years,
-                                  hashTotalsPerType);
+  hashTotalsPerType = this.calcHashOffspringInRange(years, hashTotalsPerType);
 
   for(const type in hashTotalsPerType){
     let totalForType = hashTotalsPerType[type].total;
@@ -146,8 +144,8 @@ Park.prototype.calculateDinosaurs = function(years){
   }
 
   return totalDinosAfterFinalCalc;
-
 }
+
 
 module.exports = Park;
 
