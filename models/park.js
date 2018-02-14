@@ -11,7 +11,7 @@ Park.prototype.addDinosaur = function(dinosaur){
 
 
 Park.prototype.addMultipleDinosaurs = function(dinosaurs){
-  for(dinosaur of dinosaurs){
+  for(let dinosaur of dinosaurs){
     this.enclosure.push(dinosaur);
   }
 }
@@ -23,7 +23,7 @@ Park.prototype.getNumberDinosaurs = function(){
 
 
 Park.prototype.checkForDinosaurOfTypeToRemove = function(type){
-  for(dinosaur of this.enclosure){
+  for(let dinosaur of this.enclosure){
 
     if(type.name === dinosaur.type){
       return this.enclosure.indexOf(dinosaur)
@@ -35,7 +35,6 @@ Park.prototype.checkForDinosaurOfTypeToRemove = function(type){
 
 
 Park.prototype.removeDinosaursOfType = function(type){
-
   // // below is not needed as if the array is empty
   // // it still doesn't throw an error :o
   // if(this.enclosure == []){
@@ -57,7 +56,7 @@ Park.prototype.removeDinosaursOfType = function(type){
 Park.prototype.getDinosAnnualOffspringOfOrMore = function(number){
 
   let arrayOfDinosaurs = [];
-  for(dinosaur of this.enclosure){
+  for(let dinosaur of this.enclosure){
 
     if(dinosaur.annualOffspring >= number){
       arrayOfDinosaurs.push(dinosaur);
@@ -68,7 +67,43 @@ Park.prototype.getDinosAnnualOffspringOfOrMore = function(number){
 }
 
 
+Park.prototype.calcYearOffspring = function(yearsToCalculate, totalHash){
+
+  let finalCountOfOffspring;
+
+  if (yearsToCalculate <= 0) {
+    return totalHash;
+  }
+
+  for(let dinosaur of this.enclosure){
+    let type = dinosaur.type
+    if (totalHash[type] == undefined) {
+      totalHash[type] = dinosaur.annualOffspring + 1;
+    }
+    else {
+      totalHash[type] += dinosaur.annualOffspring + 1;
+    }
+  }
+
+  yearsToCalculate -= 1;
+
+  return this.calcYearOffspring(yearsToCalculate,
+                                totalHash);
+}
+
 Park.prototype.calculateDinosaurs = function(years){
+  let totalDinosAfterFinalCalc = 0;
+  let hashTotalsPerType = {};
+  let yearsToCalculate = years;
+
+  hashTotalsPerType = this.calcYearOffspring(years,
+                                  hashTotalsPerType);
+
+  for(let type in hashTotalsPerType){
+    totalDinosAfterFinalCalc += hashTotalsPerType[type];
+  }
+
+  return totalDinosAfterFinalCalc;
 
 }
 
