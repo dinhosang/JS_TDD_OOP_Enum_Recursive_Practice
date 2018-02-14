@@ -2,6 +2,8 @@ const Park = function(name){
 
   this.name = name;
   this.enclosure = [];
+
+  Object.preventExtensions(this);
 }
 
 

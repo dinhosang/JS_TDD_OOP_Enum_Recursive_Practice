@@ -3,6 +3,7 @@ const Park      = require('../models/park.js');
 const Dinosaur  = require('../models/dinosaur.js')
 const dinoType  = require('../enums/dinoType.js')
 
+
 describe('Park', function(){
 
   let park;
@@ -105,7 +106,7 @@ describe('Park', function(){
       park.addDinosaur(tyrannosaurus);
       assert.strictEqual(park.calculateDinosaurs(2), 32);
     });
-    
+
     it('should be able to calculate number of dinosaur after year two starting with 2 dinosaurs', function(){
       park.addDinosaur(tyrannosaurus);
       park.addDinosaur(dilophosaurus);

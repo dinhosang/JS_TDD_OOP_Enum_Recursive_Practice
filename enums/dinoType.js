@@ -10,6 +10,8 @@ const dinoType = {
                   annualOffspring: 2}
 };
 
-
+// below stops attributes being modifed
+// also prevents new ones being added
+Object.freeze(dinoType);
 
 module.exports = dinoType;
