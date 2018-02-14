@@ -147,3 +147,8 @@ module.exports = Park;
 
 // look into overloading the addMultiple;
 // to accept not just an array but individual as well
+
+// tried to use arguments but having to react differently
+// to an array being passed through, to indiviual
+// dinos being passed thourgh comma separated, was causing
+// difficulty. Look into another day time willing.
