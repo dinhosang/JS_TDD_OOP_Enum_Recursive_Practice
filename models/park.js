@@ -36,7 +36,8 @@ Park.prototype.checkForDinosaurOfTypeToRemove = function(type){
   return null
 }
 
-
+// can catalogue dinos we want to keep rather than other way
+// simpler looking code that achieves same end
 Park.prototype.removeDinosaursOfType = function(type){
   // // below is not needed as if the array is empty
   // // it still doesn't throw an error :o
@@ -70,7 +71,7 @@ Park.prototype.getDinosAnnualOffspringMoreThan = function(number){
 }
 
 
-Park.prototype.calculateFirstYearOffspring = function(){
+Park.prototype.setupTotalHash = function(){
 
   let type;
   let innerHash;
@@ -82,20 +83,22 @@ Park.prototype.calculateFirstYearOffspring = function(){
 
       totalHash[type] = {};
       innerHash = totalHash[type];
-      innerHash.total = dinosaur.annualOffspring + 1;
+      innerHash.total = 1;
       innerHash.multiplier = dinosaur.annualOffspring + 1;
     }
     else {
       innerHash = totalHash[type];
-      innerHash.total += dinosaur.annualOffspring + 1;
+      innerHash.total += 1;
     }
   }
+
+  totalHash = this.calculateOffspringForYear(totalHash)
 
   return totalHash;
 }
 
 
-Park.prototype.calculateLaterYearOffspring = function(totalHash){
+Park.prototype.calculateOffspringForYear = function(totalHash){
 
   for(const type in totalHash){
 
@@ -116,10 +119,10 @@ Park.prototype.calcYearOffspring = function(yearsToCalculate, total){
   }
 
   if(totalHash === null){
-    totalHash = this.calculateFirstYearOffspring();
+    totalHash = this.setupTotalHash();
   }
   else {
-    totalHash = this.calculateLaterYearOffspring(totalHash);
+    totalHash = this.calculateOffspringForYear(totalHash);
   }
 
   yearsToCalculate -= 1;
@@ -127,6 +130,7 @@ Park.prototype.calcYearOffspring = function(yearsToCalculate, total){
   return this.calcYearOffspring(yearsToCalculate,
                                 totalHash);
 }
+
 
 Park.prototype.calculateDinosaurs = function(years){
   let totalDinosAfterFinalCalc = 0;
