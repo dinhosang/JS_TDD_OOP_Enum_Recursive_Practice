@@ -14,7 +14,7 @@ Park.prototype.addDinosaur = function(dinosaur){
 
 Park.prototype.addMultipleDinosaurs = function(arrayOfDinosaurs){
 
-  for(let dinosaur of arrayOfDinosaurs){
+  for(const dinosaur of arrayOfDinosaurs){
     this.enclosure.push(dinosaur);
   }
 }
@@ -26,7 +26,7 @@ Park.prototype.getNumberDinosaurs = function(){
 
 
 Park.prototype.checkForDinosaurOfTypeToRemove = function(type){
-  for(let dinosaur of this.enclosure){
+  for(const dinosaur of this.enclosure){
 
     if(type.name === dinosaur.type){
       return this.enclosure.indexOf(dinosaur)
@@ -59,7 +59,7 @@ Park.prototype.removeDinosaursOfType = function(type){
 Park.prototype.getDinosAnnualOffspringMoreThan = function(number){
 
   let arrayOfDinosaurs = [];
-  for(let dinosaur of this.enclosure){
+  for(const dinosaur of this.enclosure){
 
     if(dinosaur.annualOffspring > number){
       arrayOfDinosaurs.push(dinosaur);
@@ -76,7 +76,7 @@ Park.prototype.calculateFirstYearOffspring = function(){
   let innerHash;
   let totalHash = {};
 
-  for(let dinosaur of this.enclosure){
+  for(const dinosaur of this.enclosure){
     type = dinosaur.type
     if (totalHash[type] === undefined) {
 
@@ -97,7 +97,7 @@ Park.prototype.calculateFirstYearOffspring = function(){
 
 Park.prototype.calculateLaterYearOffspring = function(totalHash){
 
-  for(let type in totalHash){
+  for(const type in totalHash){
 
     let innerHash = totalHash[type];
     innerHash.total *= innerHash.multiplier;
@@ -136,7 +136,7 @@ Park.prototype.calculateDinosaurs = function(years){
   hashTotalsPerType = this.calcYearOffspring(years,
                                   hashTotalsPerType);
 
-  for(let type in hashTotalsPerType){
+  for(const type in hashTotalsPerType){
     let totalForType = hashTotalsPerType[type].total;
     totalDinosAfterFinalCalc += totalForType;
   }
