@@ -56,12 +56,12 @@ Park.prototype.removeDinosaursOfType = function(type){
 }
 
 
-Park.prototype.getDinosAnnualOffspringOfOrMore = function(number){
+Park.prototype.getDinosAnnualOffspringMoreThan = function(number){
 
   let arrayOfDinosaurs = [];
   for(let dinosaur of this.enclosure){
 
-    if(dinosaur.annualOffspring >= number){
+    if(dinosaur.annualOffspring > number){
       arrayOfDinosaurs.push(dinosaur);
     }
   }

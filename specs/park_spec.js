@@ -79,8 +79,8 @@ describe('Park', function(){
       assert.deepStrictEqual(parkWith.enclosure, arrayOfDinosaursWithoutTyra)
     })
 
-    it('should be able to see all dinosaurs with an annual offspring count equal to or higher than a chosen value', function(){
-      const actual = parkWith.getDinosAnnualOffspringOfOrMore(2);
+    it('should be able to see all dinosaurs with an annual offspring count higher than a chosen value', function(){
+      const actual = parkWith.getDinosAnnualOffspringMoreThan(2);
       assert.deepStrictEqual(actual, arrayOfDinosaursWithTwoOrMoreAnnualOffspring);
     })
   })
