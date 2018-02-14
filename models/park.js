@@ -10,8 +10,9 @@ Park.prototype.addDinosaur = function(dinosaur){
 }
 
 
-Park.prototype.addMultipleDinosaurs = function(dinosaurs){
-  for(let dinosaur of dinosaurs){
+Park.prototype.addMultipleDinosaurs = function(arrayOfDinosaurs){
+
+  for(let dinosaur of arrayOfDinosaurs){
     this.enclosure.push(dinosaur);
   }
 }
@@ -67,10 +68,11 @@ Park.prototype.getDinosAnnualOffspringOfOrMore = function(number){
 }
 
 
-Park.prototype.calculateFirstYearOffspring = function(totalHash){
+Park.prototype.calculateFirstYearOffspring = function(){
 
   let type;
   let innerHash;
+  let totalHash = {};
 
   for(let dinosaur of this.enclosure){
     type = dinosaur.type
@@ -86,7 +88,7 @@ Park.prototype.calculateFirstYearOffspring = function(totalHash){
       innerHash.total += dinosaur.annualOffspring + 1;
     }
   }
-  console.log(innerHash.multiplier);
+
   return totalHash;
 }
 
@@ -94,9 +96,8 @@ Park.prototype.calculateFirstYearOffspring = function(totalHash){
 Park.prototype.calculateLaterYearOffspring = function(totalHash){
 
   for(let type in totalHash){
-    console.log(type);
+
     let innerHash = totalHash[type];
-    console.log(innerHash);
     innerHash.total *= innerHash.multiplier;
   }
 
@@ -106,7 +107,6 @@ Park.prototype.calculateLaterYearOffspring = function(totalHash){
 
 Park.prototype.calcYearOffspring = function(yearsToCalculate, total){
 
-  let finalCountOfOffspring;
   let totalHash = total;
 
   if (yearsToCalculate <= 0) {
@@ -114,8 +114,7 @@ Park.prototype.calcYearOffspring = function(yearsToCalculate, total){
   }
 
   if(totalHash === null){
-    totalHash = {};
-    totalHash = this.calculateFirstYearOffspring(totalHash);
+    totalHash = this.calculateFirstYearOffspring();
   }
   else {
     totalHash = this.calculateLaterYearOffspring(totalHash);
@@ -136,8 +135,8 @@ Park.prototype.calculateDinosaurs = function(years){
                                   hashTotalsPerType);
 
   for(let type in hashTotalsPerType){
-    let innerHash = hashTotalsPerType[type];
-    totalDinosAfterFinalCalc += innerHash.total;
+    let totalForType = hashTotalsPerType[type].total;
+    totalDinosAfterFinalCalc += totalForType;
   }
 
   return totalDinosAfterFinalCalc;

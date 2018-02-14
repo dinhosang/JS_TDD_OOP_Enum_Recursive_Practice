@@ -105,12 +105,12 @@ describe('Park', function(){
       park.addDinosaur(tyrannosaurus);
       assert.strictEqual(park.calculateDinosaurs(2), 32);
     });
-    //
-    // it('should be able to calculate number of dinosaur after year two starting with 2 dinosaurs', function(){
-    //   park.addDinosaur(tyrannosaurus);
-    //   park.addDinosaur(dilophosaurus);
-    //   assert.strictEqual(park.calculateDinosaurs(2), 25);
-    // });
+    
+    it('should be able to calculate number of dinosaur after year two starting with 2 dinosaurs', function(){
+      park.addDinosaur(tyrannosaurus);
+      park.addDinosaur(dilophosaurus);
+      assert.strictEqual(park.calculateDinosaurs(2), 25);
+    });
   })
 
 
